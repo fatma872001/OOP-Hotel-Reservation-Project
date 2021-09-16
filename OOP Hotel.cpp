@@ -7,17 +7,17 @@ using namespace std;
 
 
 class Room {
-public:
-    int roomnumber = 0;
-    int daysOfReservation = 0;
-    bool isReserved = false;
+  protected:
+     int roomnumber = 0;
+     int daysOfReservation = 0;
+      bool isReserved = false;
 
-public:
-    //friend class Floor;
-    Room() {
-        int roomnumber = 0;
-        int daysOfReservation = 0;
-        bool isReserved = false;
+  public:
+     Room(){}
+      Room(int roomnumber, int daysOfReservation, bool isReserved) {
+        this->daysOfReservation=daysOfReservation;
+        this->isReserved=isReserved;
+        this->roomnumber=roomnumber;
     }
     virtual void ReverseRoom() = 0;
 
@@ -25,7 +25,7 @@ public:
 
     virtual bool CheckReservation() = 0;
 
-    //virtual string toString() = 0;
+    virtual string toString() = 0;
 
 
     void setRoomnumber(int roomnumber)
@@ -60,12 +60,11 @@ private:
     int numofbed = 0;
     double bedprice = 0;
 public:
-    //StandardRoom(int roomnumber, int daysOfReservation, bool isReserved, int numofbed, int bedprice) {
-    //    //super(roomnumber, daysOfReservation, isReserved); refer to parent class obj
-    //    //use typedef Base super;
-    //    this->bedprice = bedprice;
-    //    this->numofbed = numofbed;
-    //}
+	
+    StandardRoom(int roomnumber, int daysOfReservation, bool isReserved, int numofbed, int bedprice) {
+        this->bedprice = bedprice;
+        this->numofbed = numofbed;
+    }
     StandardRoom()
     {
         int numofbed = 0;
@@ -99,6 +98,10 @@ public:
     {
         return getNumofbed() * getBedprice() * getDayOfReversation();
     }
+      virtual string toString() {
+        cout<<"Room Type : Standard and " << "Room number : " << roomnumber << " and Number of beds : " << numofbed << " and Bed price :" << bedprice<< " and is reservation :" << isReserved;
+
+    }
 
 };
 
@@ -131,6 +134,9 @@ public:
     {
         return getPricepernight() * getDayOfReversation();
     }
+      virtual string toString() {
+        cout<< "Room Type : Sweet and " << " Room number :" << roomnumber << " and Price per night :" << pricepernight << " and is reservation : " <<isReserved;
+
 };
 
 class ConferanceRoom : public Room {
@@ -172,6 +178,10 @@ public:
     double TotalPrice() override
     {
         return getSeatprice() * getNumofseats() * getDayOfReversation();
+    }
+      virtual string toString() {
+        cout<< "Room Type : Conference and " << " Room number : " << roomnumber << " and the Number of Seats : " << numofseats <<"and Seat price : " << seatprice << "  and is reservation :" <<isReserved;
+
     }
 
 };
@@ -400,15 +410,16 @@ int main() {
         }
 
 
-
-        for (int i = 0; i < num; i++) {
+            // loop for be sure about file 
+      /* for (int i = 0; i < num; i++) {
             //cout << nf[i] << "  " << room[i] << " " << numr[i] << "\n";
             /Floor* array = new Floor * [num];
-            for (int j = 0; j< numr[i]; ++i)
-                array[j] = new Floor[numr[i]];*/
+            for (int j = 0; j< numr[i]; ++i){
+                array[j] = new Floor[numr[i]];
                 //cout << type[i][j] << "  " << numroomi[i][j] << "  " << numbedi[i][j] << "  " << pricei[i][j] << "\n";
 
-        }
+        } */
+        
 
         newfile.close();
 
